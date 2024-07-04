@@ -2,7 +2,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      docker: 19
+
     commands:
       - echo Installing necessary dependencies...
   pre_build:
