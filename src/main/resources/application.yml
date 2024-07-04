@@ -1,0 +1,42 @@
+
+
+spring:
+  profiles:
+    active: ${ACTIVE_PROFILE:dev}
+
+  data:
+    mongodb:
+      uri: mongodb+srv://root:${MONGODB_PASSWORD}@firstnodeapp.ricbp.mongodb.net/${DATABASE_NAME}
+      auto-index-creation: true
+
+  mail:
+    host: ${EMAIL_HOST}
+    port: ${EMAIL_PORT}
+    username: ${EMAIL_ID}
+    password: ${EMAIL_PASSWORD}
+    protocol: smtp
+    default-encoding: UTF-8
+    properties:
+      mail:
+        mime:
+          charset: UTF
+        smtp:
+          writetimeout: 10000
+          connectiontimeout: 10000
+          auth: true
+          starttls:
+            enable: true
+            required: true
+    verify:
+      host: ${VERIFY_EMAIL_HOST}
+
+server:
+    port: ${CONTAINER_PORT}
+    error:
+      path: /user/error
+      whitelabel:
+        enabled: false
+
+jwt:
+    expiration: ${JWT_EXPIRATION}
+    secret: ${JWT_SECRET}
