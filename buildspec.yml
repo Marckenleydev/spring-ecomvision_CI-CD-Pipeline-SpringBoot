@@ -3,6 +3,10 @@ phases:
   install:
     runtime-versions:
       java: openjdk8
+    commands:
+      - echo Installing OpenJDK 8
+      - apt-get update && apt-get install -y openjdk-8-jdk
+      - java -version  # Verify Java installation
   pre_build:
     commands:
       - echo Logging into Amazon ECR started on `date`
