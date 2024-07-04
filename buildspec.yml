@@ -10,28 +10,28 @@ phases:
       - REPOSITORY_URI=320103368347.dkr.ecr.us-east-1.amazonaws.com/ecomvision_cdcipipepline
       - echo Setting image tag...
       - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
-    build:
-      commands:
-        - echo Building and tagging started image on `date`
-        - echo Running mvn clean install...
-        - mvn clean install
-        - if [ $? -ne 0 ]; then echo "Maven build failed"; exit 1; fi
-        - echo Building the Docker image...
-        - docker build -t $REPOSITORY_URI:latest .
-        - echo Tagging the Docker image...
-        - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
-    post_build:
-      commands:
-        - echo Pushing Docker image to Amazon ECR started on `date`
-        - echo Pushing to repository...
-        - docker push $REPOSITORY_URI:latest
-        - docker push $REPOSITORY_URI:$IMAGE_TAG
-        - echo Setting container name...
-        - DOCKER_CONTAINER_NAME=cicdcontainer
-        - echo Writing image definitions file...
-        - printf '[{"name":"%s","imageUri":"%s"}]' $DOCKER_CONTAINER_NAME $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
-        - echo Printing imagedefinitions.json
-        - cat imagedefinitions.json
-  artifacts:
-    files:
-      - imagedefinitions.json
+  build:
+    commands:
+      - echo Building and tagging started image on `date`
+      - echo Running mvn clean install...
+      - mvn clean install
+      - if [ $? -ne 0 ]; then echo "Maven build failed"; exit 1; fi
+      - echo Building the Docker image...
+      - docker build -t $REPOSITORY_URI:latest .
+      - echo Tagging the Docker image...
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+  post_build:
+    commands:
+      - echo Pushing Docker image to Amazon ECR started on `date`
+      - echo Pushing to repository...
+      - docker push $REPOSITORY_URI:latest
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - echo Setting container name...
+      - DOCKER_CONTAINER_NAME=cicdcontainer
+      - echo Writing image definitions file...
+      - printf '[{"name":"%s","imageUri":"%s"}]' $DOCKER_CONTAINER_NAME $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - echo Printing imagedefinitions.json
+      - cat imagedefinitions.json
+artifacts:
+  files:
+    - imagedefinitions.json
