@@ -5,7 +5,7 @@ DATABASE_NAME: Admin-Dashboard-react-spring
 
 
 #Server config
-CONTAINER_PORT: ${PORT}
+CONTAINER_PORT: 8000
 ACTIVE_PROFILE: dev
 
 #Email config
