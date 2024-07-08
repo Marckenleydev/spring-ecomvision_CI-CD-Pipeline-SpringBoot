@@ -23,10 +23,10 @@ public class OverallstatController {
         return new ResponseEntity<>(overallStatService.getAllOverallstats(),OK);
     }
 
-    @GetMapping("/test")
-    public ResponseEntity<Map<String, String>> test(){
-        return ResponseEntity.ok().body(Map.of("Testing", "Up  running"));
-    }
+//    @GetMapping("/test")
+//    public ResponseEntity<Map<String, String>> test(){
+//        return ResponseEntity.ok().body(Map.of("Testing", "Up  running"));
+//    }
 
 
 }
