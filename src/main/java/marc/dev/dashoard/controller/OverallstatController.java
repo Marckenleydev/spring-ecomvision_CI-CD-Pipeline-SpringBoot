@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.springframework.http.HttpStatus.OK;
 
@@ -21,5 +22,11 @@ public class OverallstatController {
     public ResponseEntity<List<OverallStatEntity>> getMonthlyData(){
         return new ResponseEntity<>(overallStatService.getAllOverallstats(),OK);
     }
+
+    @GetMapping("/test")
+    public ResponseEntity<Map<String, String>> test(){
+        return ResponseEntity.ok().body(Map.of("Testing", "Up  running"));
+    }
+
 
 }
